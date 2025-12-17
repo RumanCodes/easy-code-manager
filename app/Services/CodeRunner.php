@@ -142,6 +142,8 @@ class CodeRunner
                         $runAt = 'wp_head';
                     }
 
+                    $isAdminCss = ($runAt == 'admin_head');
+
                     $loadUrl = '';
                     if ($this->get($snippet, 'load_as_file') == 'yes') {
                         $cachedFile = str_replace('.php', '.css', $fileName);
@@ -149,6 +151,17 @@ class CodeRunner
                         if ($loadUrl) {
                             $runAt = ($runAt == 'admin_head') ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts';
                         }
+                    }
+
+                    if($isAdminCss) {
+                        add_action('enqueue_block_editor_assets', function() use($file, $snippet, $conditionalClass, $loadUrl) {
+                            if (!$conditionalClass->evaluate($snippet['condition'])) {
+                                return;
+                            }
+
+                            $code = $this->parseBlock(file_get_contents($file), true);
+                            wp_add_inline_style('wp-edit-blocks', $code);
+                        });
                     }
 
                     add_action($runAt, function () use ($file, $snippet, $conditionalClass, $loadUrl) {
