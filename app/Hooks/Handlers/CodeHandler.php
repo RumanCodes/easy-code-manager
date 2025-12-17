@@ -51,10 +51,18 @@ class CodeHandler
 
     public function handleShortcode($atts, $content = null)
     {
+        $original = (array)$atts;
+        
         $atts = shortcode_atts([
             'id' => '',
-        ], $atts);
+        ], $original);
 
+        // Unlike the core function, keep any user arguments in the array. 
+        // This allows [fluent_snippet id="3-snippet" type="test"] such that a snippet can look up the argument in $atts['type'].
+        // Note: The below is to cover if the 3rd parameter to shortcode_atts was added i.e. to allow filtering
+        unset( $original['id'] );
+        $atts = array_merge( $atts, $original );
+        
         $fileName = $atts['id'];
         if (empty($fileName)) {
             return '';
