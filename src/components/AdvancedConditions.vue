@@ -1,5 +1,5 @@
 <template>
-    <div v-if="condition" class="snip_condition_wrap">
+    <div v-if="condition && !isBlockCss" class="snip_condition_wrap">
         <el-collapse v-model="activeName">
             <el-collapse-item name="condition">
               <template #title>
@@ -44,6 +44,11 @@ export default {
     components: {
         FilterContainer,
         InfoFilled: markRaw(InfoFilled)
+    },
+    computed: {
+        isBlockCss() {
+            return this.snippet.meta.type === 'css' && this.snippet.meta.run_at === 'block_editor'
+        }
     },
     data() {
         return {

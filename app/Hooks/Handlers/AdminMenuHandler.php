@@ -440,6 +440,10 @@ class AdminMenuHandler
                     'everywhere' => [
                         'label'       => __('Both Backend and Frontend', 'easy-code-manager'),
                         'description' => __('Apply this snippet CSS to both backend and frontend.', 'easy-code-manager')
+                    ],
+                    'block_editor' => [
+                        'label'       => __('On Block Editor', 'easy-code-manager'),
+                        'description' => __('Apply this snippet css on Block Editor', 'easy-code-manager')
                     ]
                 ]
             ],

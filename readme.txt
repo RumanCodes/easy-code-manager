@@ -6,8 +6,8 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 6.0 or higher
 Requires PHP: 7.3
-Tested up to: 6.8
-Stable tag: 10.51
+Tested up to: 6.9
+Stable tag: 10.52
 
 Add header and footer scripts, PHP Snippets, Custom CSS /JS snippets with advanced conditional logic, and more...
 
@@ -133,6 +133,12 @@ Absolutely not. Unlike other code snippets plugin, FluentSnippets does not use t
 4. Architectural Design Comparison
 
 == Changelog ==
+
+= 10.52 - Jan 21, 2025 =
+- Added Block Editor Support for CSS
+- Use Ajax endpoint to create and edit snippets for better Usability
+- Enhance handleShortcode to retain user arguments
+- UI / UX Improvements
 
 = 10.51 - May 11, 2025 =
 - Security: Added nonce verification for export/import snippets (thanks to Patchstack)
