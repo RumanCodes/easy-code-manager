@@ -80,8 +80,9 @@
                     <tag-creator v-model="snippet.meta.tags" />
                 </el-form-item>
 
-                <el-form-item v-if="snippet.meta.type == 'css' || snippet.meta.type == 'js'"  class="snippet_loading_method">
-                    <template #label>
+                <template v-if="snippet.meta.type == 'css' || snippet.meta.type == 'js'">
+                    <el-form-item  class="snippet_loading_method">
+                        <template #label>
                         <span>
                             {{$t('Load as Stylesheet File')}} <el-tooltip
                             class="box-item"
@@ -92,13 +93,35 @@
                             <el-button text size="small" :icon="InfoField" style="font-style: italic"></el-button>
                           </el-tooltip>
                         </span>
-                    </template>
+                        </template>
 
-                    <el-checkbox true-value="yes" false-value="no" v-model="snippet.meta.load_as_file">
-                        {{$t('Enable Load as Stylesheet File')}}
-                    </el-checkbox>
+                        <el-checkbox true-value="yes" false-value="no" v-model="snippet.meta.load_as_file">
+                            {{$t('Enable Load as Stylesheet File')}}
+                        </el-checkbox>
+                    </el-form-item>
 
-                </el-form-item>
+                    <el-form-item v-if="snippet.meta.type == 'css'" class="snippet_block_editor">
+                        <template #label>
+                            <span>
+                                {{$t('Block Editor Styles?')}} <el-tooltip
+                                class="box-item"
+                                effect="dark"
+                                :content="$t('if you enable this then the snippet will be loaded in the block editor (Gutenberg).')"
+                                placement="top-start"
+                            >
+                                <el-button text size="small" :icon="InfoField" style="font-style: italic"></el-button>
+                              </el-tooltip>
+                            </span>
+                        </template>
+
+                        <el-checkbox true-value="yes" false-value="no" v-model="snippet.meta.load_in_block_editor">
+                            {{$t('Load this CSS in Block Editor (Gutenberg)')}}
+                        </el-checkbox>
+
+                    </el-form-item>
+
+                </template>
+
 
             </el-col>
         </el-row>

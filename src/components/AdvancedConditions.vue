@@ -1,32 +1,33 @@
 <template>
-    <div v-if="condition && !isBlockCss" class="snip_condition_wrap">
+    <div v-if="condition" class="snip_condition_wrap">
         <el-collapse v-model="activeName">
             <el-collapse-item name="condition">
-              <template #title>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <h3 style="margin: 0;">{{ $t('Advanced Conditional Logic') }}</h3>
-                  <el-tooltip
-                      placement="top-start"
-                      class="box-item"
-                      effect="dark"
-                      content="Enable logic to add rules and limit where your snippet will be executed. Use multiple groups for different sets of rules."
-                  >
-                    <el-icon class="header-icon">
-                      <InfoFilled />
-                    </el-icon>
-                  </el-tooltip>
-                </div>
-              </template>
+                <template #title>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <h3 style="margin: 0;">{{ $t('Advanced Conditional Logic') }}</h3>
+                        <el-tooltip
+                            placement="top-start"
+                            class="box-item"
+                            effect="dark"
+                            content="Enable logic to add rules and limit where your snippet will be executed. Use multiple groups for different sets of rules."
+                        >
+                            <el-icon class="header-icon">
+                                <InfoFilled/>
+                            </el-icon>
+                        </el-tooltip>
+                    </div>
+                </template>
 
                 <div style="padding: 15px 15px 0;">
                     <el-form-item>
-                        <el-switch style="margin-right: 10px;" v-model="condition.status" active-color="#13ce66" active-value="yes" inactive-value="no"></el-switch>
-                        {{$t('Enable Conditional Logic')}}
+                        <el-switch style="margin-right: 10px;" v-model="condition.status" active-color="#13ce66"
+                                   active-value="yes" inactive-value="no"></el-switch>
+                        {{ $t('Enable Conditional Logic') }}
                     </el-form-item>
                 </div>
 
                 <template v-if="condition.status == 'yes'">
-                    <filter-container :filter-options="options" :advanced_filters="condition.items" />
+                    <filter-container :filter-options="options" :advanced_filters="condition.items"/>
                 </template>
             </el-collapse-item>
         </el-collapse>
@@ -45,11 +46,6 @@ export default {
         FilterContainer,
         InfoFilled: markRaw(InfoFilled)
     },
-    computed: {
-        isBlockCss() {
-            return this.snippet.meta.type === 'css' && this.snippet.meta.run_at === 'block_editor'
-        }
-    },
     data() {
         return {
             activeName: 'condition',
@@ -59,7 +55,7 @@ export default {
     },
     created() {
         let condition = this.snippet.meta.condition;
-        if(!condition || !condition.status || !condition.items || condition.items.length == 0) {
+        if (!condition || !condition.status || !condition.items || condition.items.length == 0) {
             condition = {
                 status: 'no',
                 run_if: 'assertive',

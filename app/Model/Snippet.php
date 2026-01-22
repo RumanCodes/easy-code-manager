@@ -396,7 +396,8 @@ class Snippet
             'run_at'       => '',
             'group'        => '',
             'condition'    => '',
-            'load_as_file' => ''
+            'load_as_file' => '',
+            'load_in_block_editor' => ''
         ];
 
         foreach ($docBlock as $key => $value) {
@@ -456,6 +457,7 @@ class Snippet
             'priority'     => 10,
             'run_at'       => '',
             'load_as_file' => '',
+            'load_in_block_editor' => '',
             'condition'    => [
                 'status' => 'no',
                 'run_if' => 'assertive',

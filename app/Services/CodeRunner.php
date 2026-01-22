@@ -137,19 +137,19 @@ class CodeRunner
                 case 'css':
                     $runAt = $this->get($snippet, 'run_at', 'wp_head');
 
-                    if ($runAt === 'block_editor') {
+                    $isBlockStyle = $this->get($snippet, 'load_in_block_editor', '') === 'yes';
+                    if ($isBlockStyle) {
                         add_filter('block_editor_settings_all', function ($settings) use ($snippet, $file) {
                             $code = $this->parseBlock(file_get_contents($file), true);
-                            if($code) {
+                            if ($code) {
                                 $settings['styles'][] = array(
-                                    'css' => $code,
+                                    'css'            => $code,
                                     '__unstableType' => 'plugin',
-                                    'source' => 'easy_code_manager'
+                                    'source'         => 'easy_code_manager'
                                 );
                             }
                             return $settings;
-                        });
-                        break;
+                        }, $this->get($snippet, 'priority', 10));
                     }
 
                     if (($runAt == 'everywehere' && is_admin()) || $runAt == 'admin_head') {

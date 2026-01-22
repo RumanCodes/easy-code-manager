@@ -102,7 +102,8 @@ class Helper
             'priority',
             'group',
             'condition',
-            'load_as_file'
+            'load_as_file',
+            'load_in_block_editor'
         ];
 
         $snippets = (new \FluentSnippets\App\Model\Snippet())->get();
